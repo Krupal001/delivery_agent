@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
             var data = {
               'to' : value.toString(),
               'notification' : {
-                'title' : 'Asif' ,
-                'body' : 'Subscribe to my channel' ,
+                'title' : 'Demo' ,
+                'body' : 'hello this is demo notification' ,
                 "sound": "jetsons_doorbell.mp3"
               },
               'android': {
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               'data' : {
                 'type' : 'msj' ,
-                'id' : 'Asif Taj'
+                'id' : 'demo'
               }
             };
 
