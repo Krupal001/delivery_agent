@@ -1,16 +1,25 @@
 import 'package:delivery_agent/screens/home_screen.dart';
+import 'package:delivery_agent/screens/notification/notification_services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
+NotificationServices notificationServices=NotificationServices();
+@pragma('vm:entry-point')
+Future<void>_firebaseMessagingBackgroundHandler(RemoteMessage message)async{
+  await Firebase.initializeApp();
 
+
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,7 +27,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
+      themeMode:ThemeMode.system,
     );
   }
 }
