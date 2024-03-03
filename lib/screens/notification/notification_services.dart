@@ -70,7 +70,6 @@ class NotificationServices {
         print('user granted provisional permission');
       }
     } else {
-      //appsetting.AppSettings.openNotificationSettings();
       if (kDebugMode) {
         print('user denied permission');
       }
@@ -136,14 +135,16 @@ class NotificationServices {
     try {
       // Specify the collection and document where you want to store the token
       String collectionName = 'deviceTokens';
-
+      String docName="fcmtokens";
       // Add or update the token in Firestore
-      await _firestore.collection(collectionName).add({
+      await _firestore.collection(collectionName).doc(docName).set({
         'token': newToken,
-        'timestamp': FieldValue.serverTimestamp(),
+
       });
     } catch (e) {
-      print('Error storing token in Firestore: $e');
+      if (kDebugMode) {
+        print('Error storing token in Firestore: $e');
+      }
     }
   }
 }
