@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'message_screen.dart';
+
 
 class NotificationServices {
   String? token = "";
@@ -129,6 +131,15 @@ class NotificationServices {
     });
 
     return token!;
+  }
+  void handleMessage(BuildContext context, RemoteMessage message) {
+
+    if(message.data['type'] =='msj'){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => MessageScreen(
+           // id: message.data['id'] ,
+          )));
+    }
   }
 
   Future<void> _storeTokenInFirestore(String newToken) async {
