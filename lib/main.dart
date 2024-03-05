@@ -1,5 +1,6 @@
-import 'package:delivery_agent/screens/home_screen.dart';
-import 'package:delivery_agent/screens/notification/notification_services.dart';
+import 'package:delivery_agent/src/features/authentication/screens/screens/home_screen.dart';
+import 'package:delivery_agent/src/features/authentication/screens/screens/notification/notification_services.dart';
+import 'package:delivery_agent/src/repository/authentication_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,8 @@ import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).
+   then((value) => Get.put(AuthenticationRepository()));
    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
